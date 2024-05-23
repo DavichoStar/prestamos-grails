@@ -13,3 +13,51 @@
 *= require mobile
 *= require_self
 */
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #FAF3EF;
+    margin: 0;
+}
+
+.header-login {
+    background-color: #392F5A;
+    border-bottom-right-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.card-signin {
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    background: #fff;
+    min-width: 400px;
+}
+
+.card-title {
+    font-weight: 600;
+    color: #333;
+}
+
+.btn-warning {
+    background-color: #FF8C42;
+    border: none;
+}
+
+.btn-warning:hover {
+    background-color: #E07A35;
+}
+
+.form-signin .form-control {
+    padding: 10px;
+    border-radius: 5px;
+}
+
+#passwordToggler {
+    cursor: pointer;
+    position: absolute;
+    right: 14%;
+    bottom: 33%;
+    font-size: 1.2rem;
+}
