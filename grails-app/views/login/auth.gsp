@@ -17,7 +17,7 @@
 			<h1 class="m-0" style="font-size: 28px">BIENVENIDO A MÓNACO S.A. DE C.V</h1>
 		</div>
 		<div class="col-5 logo row justify-content-center align-items-center">
-			<img src="assets/logo.png" alt="Mónaco S.A. de C.V."  class="img-fluid" style="height: 100px;"/>
+			<asset:image src="logo.png" alt="Mónaco S.A. de C.V."  class="img-fluid" style="height: 100px;"/>
 		</div>
 	</header>
 

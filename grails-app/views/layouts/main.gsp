@@ -8,9 +8,17 @@
     </title>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <asset:link rel="icon" href="favicon.ico" type="image/x-ico"/>
 
     <asset:stylesheet src="application.css"/>
+
+    <style>
+        .title {
+            color: white;
+            font-size: 20px;
+        }
+    </style>
 
     <g:layoutHead/>
 </head>
@@ -18,7 +26,8 @@
 <body>
 
 <nav class="navbar navbar-expand-lg navbar-dark navbar-static-top" role="navigation">
-    <a class="navbar-brand" href="/#"><asset:image src="grails.svg" alt="Grails Logo"/></a>
+    <a class="navbar-brand" href="/#"><asset:image src="logo.png" alt="Mónaco S.A. de C.V." class="img-fluid" style="height: 60px;"/></a>
+    <div class="title">SISTEMA DE MÓNACO S.A DE C.V</div>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>

@@ -25,4 +25,10 @@ grails.plugin.springsecurity.filterChain.chainMap = [
     [pattern: '/**',             filters: 'JOINED_FILTERS']
 ]
 
-grails.plugin.springsecurity.successHandler.defaultTargetUrl = '/catPlazo'
+grails.plugin.springsecurity.successHandler.defaultTargetUrl = '/main/index'
+
+grails.plugin.reveng = [
+        packageName: 'com.monaco.prestamos',
+        activeRecord: true,
+        includeTables: ['cliente', 'conyuge', 'datos_laborales', 'dependiente_familiar', 'metodo_pago', 'pago', 'prestamo']
+]

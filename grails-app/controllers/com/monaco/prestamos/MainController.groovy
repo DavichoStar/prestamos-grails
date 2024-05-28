@@ -5,6 +5,7 @@ import grails.plugin.springsecurity.annotation.Secured
 class MainController {
 
     static allowedMethods = [save: 'POST', update: 'PUT', delete: 'DELETE']
+    def springSecurityService
 
     @Secured("isAuthenticated()")
     def index() {
@@ -14,7 +15,7 @@ class MainController {
             return
         }
 
-        def roles = springSecurityService.currentUser.getRoles().collect { it.authority }
+        def roles = springSecurityService.currentUser.getAuthorities().collect { it.authority }
 
         boolean hasAdmin = roles.contains('ROLE_ADMIN')
         boolean hasManager = roles.contains('ROLE_MANAGER')

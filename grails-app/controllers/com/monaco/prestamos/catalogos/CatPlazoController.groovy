@@ -1,10 +1,10 @@
 package com.monaco.prestamos.catalogos
 
+import grails.plugin.springsecurity.annotation.Secured
 import grails.validation.ValidationException
 import static org.springframework.http.HttpStatus.*
-import grails.plugin.springsecurity.annotation.Secured
 
-@Secured(['ROLE_ADMIN', 'ROLE_MANAGER'])
+@Secured(['ROLE_ADMIN'])
 class CatPlazoController {
 
     CatPlazoService catPlazoService

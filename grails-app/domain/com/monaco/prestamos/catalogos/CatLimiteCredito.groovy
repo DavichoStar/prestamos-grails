@@ -1,21 +1,23 @@
 package com.monaco.prestamos.catalogos
 
-class CatPlazo {
+class CatLimiteCredito {
 
-    int meses
-    BigDecimal intereses
+    double montoMinimo
+    double montoMaximo
+    double montoPrestamo
 
     boolean activo = true
     Date dateCreated
     Date lastUpdated
 
     static constraints = {
-        meses nullable: false, blank: false
-        intereses nullable: false, blank: false
+        montoMinimo nullable: false, blank: false
+        montoMaximo nullable: false, blank: false
+        montoPrestamo nullable: false, blank: false
     }
 
     static mapping = {
-        id column: 'id_cat_plazo'
+        id column: 'id_cat_limite_credito'
         version false
     }
 
@@ -28,7 +30,6 @@ class CatPlazo {
     }
 
     String toString() {
-        meses
+        montoMinimo + " - " + montoMaximo + ": " + montoPrestamo
     }
-
 }

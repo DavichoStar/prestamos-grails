@@ -2,9 +2,7 @@ package com.monaco.prestamos
 
 import groovy.transform.EqualsAndHashCode
 import groovy.transform.ToString
-import grails.compiler.GrailsCompileStatic
 
-@GrailsCompileStatic
 @EqualsAndHashCode(includes='username')
 @ToString(includes='username', includeNames=true, includePackage=false)
 class User implements Serializable {
@@ -24,6 +22,10 @@ class User implements Serializable {
 
     Set<Role> getAuthorities() {
         (UserRole.findAllByUser(this) as List<UserRole>)*.role as Set<Role>
+    }
+
+    Set<Role> getRole() {
+        (UserRole.findAllByUser(this) as List<UserRole>)*.role.flatten().unique() as Set<Role>
     }
 
     static constraints = {
