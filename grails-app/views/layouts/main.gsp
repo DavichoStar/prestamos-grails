@@ -9,6 +9,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <asset:javascript src="jquery-3.7.1.min.js"/>
     <asset:link rel="icon" href="favicon.ico" type="image/x-ico"/>
 
     <asset:stylesheet src="application.css"/>
@@ -68,6 +70,5 @@
 </div>
 
 <asset:javascript src="application.js"/>
-
 </body>
 </html>

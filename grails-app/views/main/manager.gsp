@@ -12,6 +12,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home - Sistema de Mónaco</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
     body {
         font-family: 'Arial', sans-serif;
@@ -29,12 +30,13 @@
         justify-content: center;
     }
     .card {
-        background-color: white;
+        background-color: #FFF8F0;
         border-radius: 10px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         padding: 20px;
         text-align: center;
         width: 200px;
+        text-decoration: none;
     }
     .card i {
         font-size: 50px;
@@ -43,7 +45,6 @@
     .card h3 {
         font-size: 18px;
         margin: 0;
-        color: #555;
     }
     .statistics {
         margin-top: 40px;
@@ -71,22 +72,18 @@
 <body>
 <div class="container">
     <div class="dashboard">
-        <div class="card">
-            <i class="fa fa-users" style="color: #f39c12;"></i>
-            <h3>SIMULADOR</h3>
-        </div>
-        <div class="card">
-            <i class="fa fa-money" style="color: #2c3e50;"></i>
-            <h3>ABONO</h3>
-        </div>
-        <div class="card">
-            <i class="fa fa-cogs" style="color: #2c3e50;"></i>
-            <h3>CLIENTES</h3>
-        </div>
-        <div class="card">
-            <i class="fa fa-user-plus" style="color: #e67e22;"></i>
-            <h3>APERTURA DE CUENTA</h3>
-        </div>
+        <a class="card" href="/simulator">
+            <i class="fa fa-users" style="color: #FF8811;"></i>
+            <h3 style="color: #FF8811;">SIMULADOR</h3>
+        </a>
+        <a class="card" style="background-color: #392F5A" href="/account/clients">
+            <i class="fa fa-cogs" style="color: #FFF;"></i>
+            <h3 style="color: #FFF">CLIENTES</h3>
+        </a>
+        <a class="card" style="background-color: #FF8811"  href="/account/opening">
+            <i class="fa fa-user-plus" style="color: #FFF;"></i>
+            <h3 style="color: #FFF;">APERTURA DE CUENTA</h3>
+        </a>
     </div>
     <div class="statistics">
         <h2>ESTADÍSTICAS</h2>
@@ -94,13 +91,69 @@
             <div class="chart">
                 <h3>PERIODO ANTERIOR</h3>
                 <!-- Gráfico del periodo anterior -->
+                <canvas id="chart-previous"></canvas>
             </div>
             <div class="chart">
                 <h3>PERIODO ACTUAL</h3>
                 <!-- Gráfico del periodo actual -->
+                <canvas id="chart-current"></canvas>
             </div>
         </div>
     </div>
 </div>
+
+<script>
+    const chartPrevious = document.getElementById('chart-previous');
+    const chartCurrent = document.getElementById('chart-current');
+
+    const dataPrevious = {
+        labels: ['Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+        datasets: [{
+            label: 'Cuentas abiertas',
+            data: [500, 1000, 1500, 2000, 2500, 3000],
+            backgroundColor: '#392F5A33',
+            borderColor: '#392F5A',
+            borderWidth: 1
+        }]
+    };
+
+    const data = {
+        labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio'],
+        datasets: [{
+            label: 'Cuentas abiertas',
+            data: [1000, 2000, 3000, 4000, 5000, 6000],
+            backgroundColor: '#FF881133',
+            borderColor: '#FF8811',
+            borderWidth: 1
+        }]
+    };
+
+    const configPrevious = {
+        type: 'line',
+        data: dataPrevious,
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    };
+
+    const config = {
+        type: 'line',
+        data: data,
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    };
+
+    new Chart(chartPrevious, configPrevious);
+    new Chart(chartCurrent, config);
+</script>
 </body>
 </html>
