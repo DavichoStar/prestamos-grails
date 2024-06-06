@@ -8,6 +8,7 @@ class Prestamo {
 	Integer diaDePago
 	String estatus
 	Date createdAt
+	Date updatedAt
 
 	static hasMany = [pagos: Pago]
 	static belongsTo = [Cliente]
@@ -21,5 +22,13 @@ class Prestamo {
 		diaDePago nullable: true
 		estatus nullable: true, maxSize: 100
 		createdAt nullable: true
+	}
+
+	def beforeInsert() {
+		createdAt = new Date()
+	}
+
+	def beforeUpdate() {
+		updatedAt = new Date()
 	}
 }

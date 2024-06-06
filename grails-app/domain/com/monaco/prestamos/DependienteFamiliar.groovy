@@ -8,7 +8,6 @@ class DependienteFamiliar {
 	String parentesco
 	Date fechaNacimiento
 	String ocupacion
-	Cliente cliente
 
 	static belongsTo = [Cliente]
 

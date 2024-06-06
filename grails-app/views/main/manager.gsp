@@ -76,7 +76,7 @@
             <i class="fa fa-users" style="color: #FF8811;"></i>
             <h3 style="color: #FF8811;">SIMULADOR</h3>
         </a>
-        <a class="card" style="background-color: #392F5A" href="/account/clients">
+        <a class="card" style="background-color: #392F5A" href="/cliente">
             <i class="fa fa-cogs" style="color: #FFF;"></i>
             <h3 style="color: #FFF">CLIENTES</h3>
         </a>

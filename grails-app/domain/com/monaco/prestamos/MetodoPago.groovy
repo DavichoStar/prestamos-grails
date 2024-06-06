@@ -7,7 +7,6 @@ class MetodoPago {
 	Integer cvv
 	String tipoTarjeta
 	String banco
-	Cliente cliente
 
 	static hasMany = [pagos: Pago]
 	static belongsTo = [Cliente]

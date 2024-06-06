@@ -8,7 +8,8 @@ import com.monaco.prestamos.Role
 import com.monaco.prestamos.UserRole
 
 @Transactional
-@Secured('permitAll')
+//@Secured('permitAll')
+@Secured(['ROLE_ADMIN'])
 class RegisterController {
 
     static allowedMethods = [register: 'POST']

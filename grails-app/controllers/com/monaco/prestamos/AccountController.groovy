@@ -81,13 +81,13 @@ class AccountController {
             }
 
             def datosLaborales = new DatosLaborales(
-                    empresa: params.companyName,
+                    nombre: params.companyName,
                     puesto: params.companyPosition,
-                    jefeInmediato: params.companyBoss,
+                    nombreJefeInmediato: params.companyBoss,
                     telefono: params.companyPhone,
                     direccion: params.companyAddress,
                     antiguedad: params.companyYears,
-                    ingresoMensual: params.companyIncome
+                    sueldo: params.companyIncome
             )
             datosLaborales.save()
 
@@ -95,7 +95,8 @@ class AccountController {
                     numeroTarjeta: params.cardNumber,
                     tipoTarjeta: params.cardType,
                     nombreTarjeta: params.cardName,
-                    fechaExpiracion: params.cardExpiration,
+                    banco: '',
+                    fechaCaducidad: params.cardExpiration,
                     cvv: params.cardCvv
             )
             metodoPago.save()

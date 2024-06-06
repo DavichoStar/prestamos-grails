@@ -36,4 +36,12 @@ class Cliente {
 		createdAt nullable: true
 		uptatedAt nullable: true
 	}
+
+	def beforeInsert() {
+		createdAt = new Date()
+	}
+
+	def beforeUpdate() {
+		uptatedAt = new Date()
+	}
 }

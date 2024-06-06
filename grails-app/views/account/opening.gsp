@@ -318,7 +318,7 @@
                     <div class="row p-0">
                         <div class="form-group col-12 col-sm-6 pr-2 p-0">
                             <label for="cardNumber">Número de tarjeta</label>
-                            <input type="text" id="cardNumber" name="cardNumber" placeholder="Ingrese el número de tarjeta" minlength="18" maxlength="18" value="${params?.cardNumber}">
+                            <input type="text" id="cardNumber" name="cardNumber" placeholder="Ingrese el número de tarjeta" minlength="16" maxlength="16" value="${params?.cardNumber}">
                             <h5 id="cardNumberCheck" style="color: red;"></h5>
                         </div>
 
@@ -938,7 +938,7 @@
             if (cardNumber.length === 0) {
                 $('#cardNumberCheck').html('**Campo requerido**').show();
                 errorCardNumber = true;
-            } else if (cardNumber.length !== 18 || Number.isNaN(Number(cardNumber))) {
+            } else if (cardNumber.length !== 16 || Number.isNaN(Number(cardNumber))) {
                 $('#cardNumberCheck').html('**Número inválido**').show();
                 errorCardNumber = true;
             } else {

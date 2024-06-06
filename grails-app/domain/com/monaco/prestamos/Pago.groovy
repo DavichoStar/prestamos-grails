@@ -4,6 +4,7 @@ class Pago {
 
 	Double cantidad
 	Date createdAt
+	Date updatedAt
 	MetodoPago metodoPago
 	Prestamo prestamo
 
@@ -16,5 +17,13 @@ class Pago {
 
 	static constraints = {
 		createdAt nullable: true
+	}
+
+	def beforeInsert() {
+		createdAt = new Date()
+	}
+
+	def beforeUpdate() {
+		updatedAt = new Date()
 	}
 }

@@ -10,7 +10,6 @@ class DatosLaborales {
 	String antiguedad
 	Double sueldo
 	Date createdAt
-	Cliente cliente
 
 	static belongsTo = [Cliente]
 
@@ -24,5 +23,9 @@ class DatosLaborales {
 		nombreJefeInmediato nullable: true
 		telefono nullable: true
 		createdAt nullable: true
+	}
+
+	def beforeInsert() {
+		createdAt = new Date()
 	}
 }
