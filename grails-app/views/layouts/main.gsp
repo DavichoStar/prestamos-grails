@@ -58,11 +58,11 @@
     <g:layoutBody/>
 </div>
 
-<div class="footer row" role="contentinfo">
+<footer class="footer row" role="contentinfo">
     <div class="col">
         <p>Desarrollado por <a href="https://github.com/DavichoStar" target="_blank">DavichoStar</a>.</p>
     </div>
-</div>
+</footer>
 
 
 <div id="spinner" class="spinner" style="display:none;">

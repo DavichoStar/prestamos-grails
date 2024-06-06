@@ -78,7 +78,7 @@ class SimulatorController {
         </div>
         
         <button class="button-main mt-4" type="button" id="calculate" onclick="onGoToAccount()">
-            IR A APERTURAR CUENTA
+            INICIAR APERTURA DE CUENTA
         </button>
         """
 

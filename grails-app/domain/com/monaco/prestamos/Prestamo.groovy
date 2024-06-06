@@ -8,7 +8,6 @@ class Prestamo {
 	Integer diaDePago
 	String estatus
 	Date createdAt
-	Cliente cliente
 
 	static hasMany = [pagos: Pago]
 	static belongsTo = [Cliente]

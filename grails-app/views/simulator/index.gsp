@@ -51,6 +51,9 @@
             font-size: 16px;
             cursor: pointer;
         }
+        button:hover {
+            opacity: 0.8;
+        }
         button.calculate {
             background-color: #FF8811;
             color: white;
@@ -100,42 +103,42 @@
     <form class="row" id="simulador">
         <div class="col-12 col-sm-6 card">
             <div class="card-body">
-                <div class="form-group">
-                    <label for="name">Nombre</label>
-                    <input type="text" id="name" name="name" placeholder="Ingrese el nombre del cliente" required>
-                    <h5 id="nameCheck" style="color: red;"></h5>
-                </div>
-
                 <div class="row p-0">
                     <div class="form-group col-12 col-sm-6 pr-2 p-0">
+                        <label for="name">Nombre</label>
+                        <input type="text" id="name" name="name" placeholder="Ingrese el nombre del cliente" required>
+                        <h5 id="nameCheck" style="color: red;"></h5>
+                    </div>
+
+                    <div class="form-group col-12 col-sm-6 pl-2 p-0">
                         <label for="lastName">Apellido Paterno</label>
                         <input type="text" id="lastName" name="lastName" placeholder="Ingrese el primer apellido" required>
                         <h5 id="lastNameCheck" style="color: red;"></h5>
                     </div>
+                </div>
 
-                    <div class="form-group col-12 col-sm-6 pl-2 p-0">
+                <div class="row p-0">
+                    <div class="form-group col-12 col-sm-6 pr-2 p-0">
                         <label for="secondLastName">Apellido Materno</label>
                         <input type="text" id="secondLastName" name="secondLastName" placeholder="Ingrese el segundo apellido" required>
                         <h5 id="secondLastNameCheck" style="color: red;"></h5>
                     </div>
-                </div>
 
-                <div class="row p-0">
-                    <div class="form-group col-12 col-sm-6 pr-2 p-0">
+                    <div class="form-group col-12 col-sm-6 pl-2 p-0">
                         <label for="monthlyIncome">Sueldo Mensual</label>
                         <input type="text" id="monthlyIncome" name="monthlyIncome" placeholder="Ingrese su ingreso mensual" required>
                         <h5 id="monthlyIncomeCheck" style="color: red;"></h5>
                     </div>
-
-                    <div class="form-group col-12 col-sm-6 pl-2 p-0">
-                        <label for="loanAmount">Cantidad del préstamo</label>
-                        <input type="text" id="loanAmount" name="loanAmount" placeholder="Ingrese la cantidad del préstamo" required disabled>
-                        <h5 id="loanAmountCheck" style="color: red;"></h5>
-                    </div>
                 </div>
 
                 <div class="row p-0">
                     <div class="form-group col-12 col-sm-6 pr-2 p-0">
+                        <label for="loanAmount">Cantidad del préstamo</label>
+                        <input type="text" id="loanAmount" name="loanAmount" placeholder="Ingrese la cantidad del préstamo" required disabled>
+                        <h5 id="loanAmountCheck" style="color: red;"></h5>
+                    </div>
+
+                    <div class="form-group col-12 col-sm-6 pl-2 p-0">
                         <label for="term">Plazo</label>
                         <g:select
                                 id="term" name="term"
@@ -147,16 +150,21 @@
                         />
                         <h5 id="termCheck" style="color: red;"></h5>
                     </div>
-
-                    <div class="col-12 col-sm-6">
-                        <button class="button-main col" type="button" onclick="onClean()">LIMPIAR</button>
-                        <button class="delete col" type="button">ELIMINAR</button>
-                    </div>
                 </div>
+
+                <button class="calculate" type="button" id="calculateButton">CALCULAR</button>
             </div>
         </div>
         <div class="col-12 col-sm-6">
-            <button class="calculate" type="button" id="calculate">CALCULAR</button>
+            <div class="row p-0 align-items-center">
+                <div class="col-12 col-sm-6 pr-1 p-0">
+                    <button class="button-main col" type="button" onclick="onClean()">LIMPIAR</button>
+                </div>
+
+                <div class="col-12 col-sm-6 pl-1 p-0">
+                    <button class="delete col" type="button">ELIMINAR</button>
+                </div>
+            </div>
             <div id="results" class="mt-3"></div>
         </div>
     </form>
@@ -310,7 +318,7 @@
             }
         }
 
-        $('#calculate').click(function () {
+        $('#calculateButton').click(function () {
             checkName();
             checkLastName();
             checkSecondLastName();
@@ -318,10 +326,12 @@
             checkTerm();
 
             if (!errorName && !errorLastName && !errorSecondLastName && !errorMonthlyIncome && !errorLoanAmount && !errorTerm) {
+                console.log('Calculando...');
                 $.ajax({
                     url: 'simulator/calcular',
                     type: 'POST',
                     data: $('#simulador').serialize(),
+                    async: true,
                     success: function (response) {
                         $('#results').html(response);
                     }
@@ -347,6 +357,18 @@
             $('#term').val('null');
             $('#results').html('');
         }
+    }
+
+    function onPrint() {
+        // Ocultar botones y footer class
+        $('button').hide();
+        $('footer').hide();
+
+        window.print();
+
+        // Mostrar botones y footer
+        $('button').show();
+        $('footer').show();
     }
 </script>
 </body>

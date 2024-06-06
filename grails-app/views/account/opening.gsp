@@ -51,10 +51,8 @@
         font-size: 16px;
         cursor: pointer;
     }
-    button.calculate {
-        background-color: #FF8811;
-        color: white;
-        width: 100%;
+    button:hover {
+        opacity: 0.8;
     }
     button.delete {
         padding: 10px 0;
@@ -97,7 +95,7 @@
     <h1>APERTURA DE CUENTA</h1>
     <div class="note">* Para buscar una cuenta guardada, comienza a escribir en nombre del cliente</div>
 
-    <form class="row" id="accountOpen">
+    <form class="row" id="accountOpen" method="post" action="${createLink(controller: 'account', action: 'resumeRedirect')}">
         <div class="col-12 col-sm-6">
             <div class="card">
                 <div class="card-body">
@@ -105,20 +103,20 @@
 
                     <div class="form-group">
                         <label for="name">Nombre</label>
-                        <input type="text" id="name" name="name" placeholder="Ingrese el nombre del cliente" required value="${params?.name}">
+                        <input type="text" id="name" name="name" placeholder="Ingrese el nombre del cliente" required minlength="2" value="${params?.name}">
                         <h5 id="nameCheck" style="color: red;"></h5>
                     </div>
 
                     <div class="row p-0">
                         <div class="form-group col-12 col-sm-6 pr-2 p-0">
                             <label for="lastName">Apellido Paterno</label>
-                            <input type="text" id="lastName" name="lastName" placeholder="Ingrese el primer apellido" required value="${params?.lastName}">
+                            <input type="text" id="lastName" name="lastName" placeholder="Ingrese el primer apellido" required minlength="2" value="${params?.lastName}">
                             <h5 id="lastNameCheck" style="color: red;"></h5>
                         </div>
 
                         <div class="form-group col-12 col-sm-6 pl-2 p-0">
                             <label for="secondLastName">Apellido Materno</label>
-                            <input type="text" id="secondLastName" name="secondLastName" placeholder="Ingrese el segundo apellido" required value="${params?.secondLastName}">
+                            <input type="text" id="secondLastName" name="secondLastName" placeholder="Ingrese el segundo apellido" required minlength="2" value="${params?.secondLastName}">
                             <h5 id="secondLastNameCheck" style="color: red;"></h5>
                         </div>
                     </div>
@@ -126,21 +124,21 @@
                     <div class="row p-0">
                         <div class="form-group col-12 p-0">
                             <label for="lastName">Direccion</label>
-                            <input type="text" id="address" name="address" placeholder="Ingrese la dirección" value="${params?.address}">
+                            <input type="text" id="address" name="address" placeholder="Ingrese la dirección" required minlength="2" value="${params?.address}">
                             <h5 id="addressCheck" style="color: red;"></h5>
                         </div>
                     </div>
 
                     <div class="row p-0">
                         <div class="form-group col-12 col-sm-6 pr-2 p-0">
-                            <label for="lastName">Número de teléfono</label>
-                            <input type="text" id="phone" name="phone" placeholder="Ingrese el número de teléfono" required value="${params?.phone}">
+                            <label for="phone">Número de teléfono</label>
+                            <input type="text" id="phone" name="phone" placeholder="Ingrese el número de teléfono" minlength="10" maxlength="14" required value="${params?.phone}">
                             <h5 id="phoneCheck" style="color: red;"></h5>
                         </div>
 
                         <div class="form-group col-12 col-sm-6 pl-2 p-0">
-                            <label for="secondLastName">Clave de elector</label>
-                            <input type="text" id="electorKey" name="electorKey" placeholder="Ingrese la clave de elector" required value="${params?.electorKey}">
+                            <label for="electorKey">Clave de elector</label>
+                            <input type="text" id="electorKey" name="electorKey" placeholder="Ingrese la clave de elector" minlength="18" maxlength="18" required value="${params?.electorKey}">
                             <h5 id="electorKeyCheck" style="color: red;"></h5>
                         </div>
                     </div>
@@ -192,13 +190,13 @@
                     <div class="row p-0">
                         <div class="form-group col-12 col-sm-6 pr-2 p-0">
                             <label for="spouseName">Nombre</label>
-                            <input type="text" id="spouseName" name="spouseName" placeholder="Ingrese el nombre del cónyuge" required value="${params?.spouseName}">
+                            <input type="text" id="spouseName" name="spouseName" placeholder="Ingrese el nombre del cónyuge" required minlength="2" value="${params?.spouseName}">
                             <h5 id="spouseNameCheck" style="color: red;"></h5>
                         </div>
 
                         <div class="form-group col-12 col-sm-6 pl-2 p-0">
                             <label for="spouseLastName">Apellido Paterno</label>
-                            <input type="text" id="spouseLastName" name="spouseLastName" placeholder="Ingrese el primer apellido" required value="${params?.spouseLastName}">
+                            <input type="text" id="spouseLastName" name="spouseLastName" placeholder="Ingrese el primer apellido" required minlength="2" value="${params?.spouseLastName}">
                             <h5 id="spouseLastNameCheck" style="color: red;"></h5>
                         </div>
                     </div>
@@ -206,13 +204,13 @@
                     <div class="row p-0">
                         <div class="form-group col-12 col-sm-6 pr-2 p-0">
                             <label for="spouseSecondLastName">Apellido Materno</label>
-                            <input type="text" id="spouseSecondLastName" name="spouseSecondLastName" placeholder="Ingrese el segundo apellido" value="${params?.spouseSecondLastName}">
+                            <input type="text" id="spouseSecondLastName" name="spouseSecondLastName" placeholder="Ingrese el segundo apellido" required minlength="2" value="${params?.spouseSecondLastName}">
                             <h5 id="spouseSecondLastNameCheck" style="color: red;"></h5>
                         </div>
 
                         <div class="form-group col-12 col-sm-6 pl-2 p-0">
                             <label for="spousePhone">Número de teléfono</label>
-                            <input type="text" id="spousePhone" name="spousePhone" placeholder="Ingrese el número de teléfono" required value="${params?.spousePhone}">
+                            <input type="text" id="spousePhone" name="spousePhone" placeholder="Ingrese el número de teléfono" minlength="10" maxlength="14" required value="${params?.spousePhone}">
                             <h5 id="spousePhoneCheck" style="color: red;"></h5>
                         </div>
                     </div>
@@ -234,6 +232,7 @@
                                 <option value="FEMENINO">Femenino</option>
                                 <option value="OTRO">Otro</option>
                             </select>
+                            <h5 id="spouseGenderCheck" style="color: red;"></h5>
                         </div>
 
                         <div class="form-group col-12 col-sm-6 pl-2 p-0">
@@ -246,6 +245,7 @@
                                 <option value="HOGAR">Hogar</option>
                                 <option value="OTRO">Otro</option>
                             </select>
+                            <h5 id="spouseOccupationCheck" style="color: red;"></h5>
                         </div>
                     </div>
                 </div>
@@ -261,7 +261,7 @@
                         <div class="row p-0">
                             <div class="form-group col-12 col-sm-6 pr-2 p-0">
                                 <label for="companyName">Nombre de la empresa</label>
-                                <input type="text" id="companyName" name="companyName" placeholder="Ingrese el nombre de la empresa" value="${params?.companyName}">
+                                <input type="text" id="companyName" name="companyName" placeholder="Ingrese el nombre de la empresa" minlength="2" value="${params?.companyName}">
                                 <h5 id="companyNameCheck" style="color: red;"></h5>
                             </div>
 
@@ -281,7 +281,7 @@
 
                             <div class="form-group col-12 col-sm-6 pl-2 p-0">
                                 <label for="companyPhone">Teléfono de la empresa</label>
-                                <input type="text" id="companyPhone" name="companyPhone" placeholder="Ingrese el teléfono de la empresa" value="${params?.companyPhone}">
+                                <input type="text" id="companyPhone" name="companyPhone" placeholder="Ingrese el teléfono de la empresa" minlength="10" maxlength="14" value="${params?.companyPhone}">
                                 <h5 id="companyPhoneCheck" style="color: red;"></h5>
                             </div>
                         </div>
@@ -318,7 +318,7 @@
                     <div class="row p-0">
                         <div class="form-group col-12 col-sm-6 pr-2 p-0">
                             <label for="cardNumber">Número de tarjeta</label>
-                            <input type="text" id="cardNumber" name="cardNumber" placeholder="Ingrese el número de tarjeta" value="${params?.cardNumber}">
+                            <input type="text" id="cardNumber" name="cardNumber" placeholder="Ingrese el número de tarjeta" minlength="18" maxlength="18" value="${params?.cardNumber}">
                             <h5 id="cardNumberCheck" style="color: red;"></h5>
                         </div>
 
@@ -329,6 +329,15 @@
                                 <option value="CREDITO">Crédito</option>
                                 <option value="DEBITO">Débito</option>
                             </select>
+                            <h5 id="cardTypeCheck" style="color: red;"></h5>
+                        </div>
+                    </div>
+
+                    <div class="row p-0">
+                        <div class="form-group col-12 pr-2 p-0">
+                            <label for="cardName">Nombre del titular</label>
+                            <input type="text" id="cardName" name="cardName" placeholder="Ingrese el nombre completo" minlength="2" value="${params?.cardNumber}">
+                            <h5 id="cardNameCheck" style="color: red;"></h5>
                         </div>
                     </div>
 
@@ -376,6 +385,7 @@
 
                     <div class="row p-0">
                         <button class="button-main col" type="button" onclick="onClean()">LIMPIAR</button>
+                        <button id="nextButton" class="button-main col ml-3" style="background-color: #FF8811;" type="button">CONTINUAR</button>
                     </div>
                 </div>
             </div>
@@ -405,9 +415,7 @@
 
 
         let errorName = true;
-        $('#name').keyup(function () {
-            checkName();
-        });
+        $('#name').keyup(checkName);
 
         function checkName() {
             let nameValue = $('#name').val();
@@ -422,9 +430,7 @@
         }
 
         let errorLastName = true;
-        $('#lastName').keyup(function () {
-            checkLastName();
-        });
+        $('#lastName').keyup(checkLastName);
 
         function checkLastName() {
             let lastNameValue = $('#lastName').val();
@@ -439,9 +445,7 @@
         }
 
         let errorSecondLastName = true;
-        $('#secondLastName').keyup(function () {
-            checkSecondLastName();
-        });
+        $('#secondLastName').keyup(checkSecondLastName);
 
         function checkSecondLastName() {
             let secondLastNameValue = $('#secondLastName').val();
@@ -485,9 +489,7 @@
         }
 
         let errorLoanAmount = true;
-        $('#loanAmount').keyup(function () {
-            checkLoanAmount();
-        });
+        $('#loanAmount').keyup(checkLoanAmount);
 
         function checkLoanAmount() {
             let companyIncomeValue = $('#companyIncome').val();
@@ -532,9 +534,7 @@
 
         $('#termCheck').hide();
         let errorTerm = true;
-        $('#term').change(function () {
-            checkTerm();
-        });
+        $('#term').change(checkTerm);
 
         function checkTerm() {
             let termValue = $('#term').val();
@@ -549,7 +549,67 @@
             }
         }
 
-        $('#birthDate').change(function () {
+        let errorAddress = true;
+        $('#address').keyup(checkAddress);
+
+        function checkAddress() {
+            let address = $('#address').val();
+            if (address.length === 0) {
+                $('#addressCheck').html('**Campo requerido**');
+                $('#addressCheck').show();
+                errorAddress = true;
+            } else {
+                $('#addressCheck').hide();
+                errorAddress = false;
+            }
+        }
+
+        let errorPhone = true;
+        $('#phone').keyup(checkPhone);
+
+        function checkPhone() {
+            let phone = $('#phone').val();
+            if (phone.length === 0) {
+                $('#phoneCheck').html('**Campo requerido**');
+                $('#phoneCheck').show();
+                errorPhone = true;
+            } else if (phone.length < 10) {
+                $('#phoneCheck').html('**Número de teléfono inválido**');
+                $('#phoneCheck').show();
+                errorPhone = true;
+            } else if (Number.isNaN(Number(phone))) {
+                $('#phoneCheck').html('**Debe ser un número válido**');
+                $('#phoneCheck').show();
+                errorPhone = true;
+            } else {
+                $('#phoneCheck').hide();
+                errorPhone = false;
+            }
+        }
+
+        let errorElectorKey = true;
+        $('#electorKey').keyup(checkElectorKey);
+
+        function checkElectorKey() {
+            let electorKey = $('#electorKey').val();
+            if (electorKey.length === 0) {
+                $('#electorKeyCheck').html('**Campo requerido**');
+                $('#electorKeyCheck').show();
+                errorElectorKey = true;
+            } else if (electorKey.length != 18) {
+                $('#electorKeyCheck').html('**Clave de elector inválida**');
+                $('#electorKeyCheck').show();
+                errorElectorKey = true;
+            } else {
+                $('#electorKeyCheck').hide();
+                errorElectorKey = false;
+            }
+        }
+
+        let errorBirthDate = true;
+        $('#birthDate').change(checkBirthDate);
+
+        function checkBirthDate() {
             let birthDate = new Date($('#birthDate').val());
             let today = new Date();
             let age = today.getFullYear() - birthDate.getFullYear();
@@ -560,55 +620,423 @@
             }
 
             $('#birthDateCalculate').html('Edad: ' + age + ' años');
-        });
+            if (age < 18) {
+                $('#birthDateCheck').html('**Debes ser mayor de edad para solicitar un préstamo**');
+                $('#birthDateCheck').show();
+                errorBirthDate = true;
+            } else {
+                $('#birthDateCheck').hide();
+                errorBirthDate = false;
+            }
+        }
 
-        $('#civilStatus').change(function () {
+        let errorCivilStatus = true;
+        $('#civilStatus').change(checkCivilStatus);
+
+        function checkCivilStatus() {
             let civilStatus = $('#civilStatus').val();
-            let civilForm = $('#civilForm');
+            if (civilStatus === 'null') {
+                $('#civilStatusCheck').html('**Campo requerido**');
+                $('#civilStatusCheck').show();
+                errorCivilStatus = true;
+            } else {
+                $('#civilStatusCheck').hide();
+                errorCivilStatus = false;
+
+                let civilForm = $('#civilForm');
+
+                if (civilStatus === 'CASADO') {
+                    civilForm.show();
+                } else {
+                    civilForm.hide();
+                }
+            }
+        }
+
+        let errorOccupation = true;
+        $('#occupation').change(checkOccupation);
+
+        function checkOccupation() {
+            let occupation = $('#occupation').val();
+            if (occupation === 'null') {
+                $('#occupationCheck').html('**Campo requerido**');
+                $('#occupationCheck').show();
+                errorOccupation = true;
+            } else {
+                $('#occupationCheck').hide();
+                errorOccupation = false;
+
+                let companyForm = $('#companyForm');
+                let companyTitle = $('#companyTitle');
+                let companyYearsForm = $('#companyYearsForm');
+
+                if (occupation === 'EMPLEADO') {
+                    companyTitle.html('Datos Laborales');
+                    companyForm.show();
+                    companyYearsForm.show();
+                } else {
+                    companyTitle.html('Ingresos');
+                    companyForm.hide();
+                    companyYearsForm.hide();
+                }
+            }
+        }
+
+        let errorSpouseName = true;
+        $('#spouseName').keyup(checkSpouseName);
+
+        function checkSpouseName() {
+            let civilStatus = $('#civilStatus').val();
 
             if (civilStatus === 'CASADO') {
-                civilForm.show();
+                let spouseName = $('#spouseName').val();
+                if (spouseName.length === 0) {
+                    $('#spouseNameCheck').html('**Campo requerido**');
+                    $('#spouseNameCheck').show();
+                    errorSpouseName = true;
+                } else {
+                    $('#spouseNameCheck').hide();
+                    errorSpouseName = false;
+                }
             } else {
-                civilForm.hide();
+                $('#spouseNameCheck').hide();
+                errorSpouseName = false;
             }
-        });
+        }
 
-        $('#occupation').change(function () {
-            let ocupation = $('#occupation').val();
-            let companyForm = $('#companyForm');
-            let companyTitle = $('#companyTitle');
-            let companyYearsForm = $('#companyYearsForm');
+        let errorSpouseLastName = true;
+        $('#spouseLastName').keyup(checkSpouseLastName);
 
-            if (ocupation === 'EMPLEADO') {
-                companyTitle.html('Datos Laborales');
-                companyForm.show();
-                companyYearsForm.show();
+        function checkSpouseLastName() {
+            let civilStatus = $('#civilStatus').val();
+
+            if (civilStatus === 'CASADO') {
+                let spouseLastName = $('#spouseLastName').val();
+                if (spouseLastName.length === 0) {
+                    $('#spouseLastNameCheck').html('**Campo requerido**');
+                    $('#spouseLastNameCheck').show();
+                    errorSpouseLastName = true;
+                } else {
+                    $('#spouseLastNameCheck').hide();
+                    errorSpouseLastName = false;
+                }
             } else {
-                companyTitle.html('Ingresos');
-                companyForm.hide();
-                companyYearsForm.hide();
+                $('#spouseLastNameCheck').hide();
+                errorSpouseLastName = false;
             }
-        });
+        }
+
+        let errorSpouseSecondLastName = true;
+        $('#spouseSecondLastName').keyup(checkSpouseSecondLastName);
+
+        function checkSpouseSecondLastName() {
+            let civilStatus = $('#civilStatus').val();
+            if (civilStatus === 'CASADO') {
+                let spouseSecondLastName = $('#spouseSecondLastName').val();
+                if (spouseSecondLastName.length === 0) {
+                    $('#spouseSecondLastNameCheck').html('**Campo requerido**');
+                    $('#spouseSecondLastNameCheck').show();
+                    errorSpouseSecondLastName = true;
+                } else {
+                    $('#spouseSecondLastNameCheck').hide();
+                    errorSpouseSecondLastName = false;
+                }
+            } else {
+                $('#spouseSecondLastNameCheck').hide();
+                errorSpouseSecondLastName = false;
+            }
+        }
+
+        let errorSpousePhone = true;
+        $('#spousePhone').keyup(checkSpousePhone);
+
+        function checkSpousePhone() {
+            let civilStatus = $('#civilStatus').val();
+
+            if (civilStatus === 'CASADO') {
+                let spousePhone = $('#spousePhone').val();
+                if (spousePhone.length === 0) {
+                    $('#spousePhoneCheck').html('**Campo requerido**');
+                    $('#spousePhoneCheck').show();
+                    errorSpousePhone = true;
+                } else if (spousePhone.length < 10) {
+                    $('#spousePhoneCheck').html('**Número de teléfono inválido**');
+                    $('#spousePhoneCheck').show();
+                    errorSpousePhone = true;
+                } else if (Number.isNaN(Number(spousePhone))) {
+                    $('#spousePhoneCheck').html('**Debe ser un número válido**');
+                    $('#spousePhoneCheck').show();
+                    errorSpousePhone = true;
+                } else {
+                    $('#spousePhoneCheck').hide();
+                    errorSpousePhone = false;
+                }
+            } else {
+                $('#spousePhoneCheck').hide();
+                errorSpousePhone = false;
+            }
+        }
+
+        let errorSpouseAddress = true;
+        $('#spouseAddress').keyup(checkSpouseAddress);
+
+        function checkSpouseAddress() {
+            let civilStatus = $('#civilStatus').val();
+
+            if (civilStatus === 'CASADO') {
+                let spouseAddress = $('#spouseAddress').val();
+                if (spouseAddress.length === 0) {
+                    $('#spouseAddressCheck').html('**Campo requerido**');
+                    $('#spouseAddressCheck').show();
+                    errorSpouseAddress = true;
+                } else {
+                    $('#spouseAddressCheck').hide();
+                    errorSpouseAddress = false;
+                }
+            } else {
+                $('#spouseAddressCheck').hide();
+                errorSpouseAddress = false;
+            }
+        }
+
+        let errorSpouseOccupation = true;
+        $('#spouseOccupation').change(checkSpouseOccupation);
+
+        function checkSpouseOccupation() {
+            let civilStatus = $('#civilStatus').val();
+
+            if (civilStatus === 'CASADO') {
+                let spouseOccupation = $('#spouseOccupation').val();
+                if (spouseOccupation === 'null') {
+                    $('#spouseOccupationCheck').html('**Campo requerido**');
+                    $('#spouseOccupationCheck').show();
+                    errorSpouseOccupation = true;
+                } else {
+                    $('#spouseOccupationCheck').hide();
+                    errorSpouseOccupation = false;
+                }
+            } else {
+                $('#spouseOccupationCheck').hide();
+                errorSpouseOccupation = false;
+            }
+        }
+
+        let errorCompanyName = true;
+        $('#companyName').keyup(checkCompanyName);
+
+        function checkCompanyName() {
+            let occupation = $('#occupation').val();
+            let companyName = $('#companyName').val();
+            if (occupation === 'EMPLEADO' && companyName.length === 0) {
+                $('#companyNameCheck').html('**Campo requerido**');
+                $('#companyNameCheck').show();
+                errorCompanyName = true;
+            } else {
+                $('#companyNameCheck').hide();
+                errorCompanyName = false;
+            }
+        }
+
+        let errorCompanyPosition = true;
+        $('#companyPosition').keyup(checkCompanyPosition);
+
+        function checkCompanyPosition() {
+            let occupation = $('#occupation').val();
+            let companyPosition = $('#companyPosition').val();
+            if (occupation === 'EMPLEADO' && companyPosition.length === 0) {
+                $('#companyPositionCheck').html('**Campo requerido**');
+                $('#companyPositionCheck').show();
+                errorCompanyPosition = true;
+            } else {
+                $('#companyPositionCheck').hide();
+                errorCompanyPosition = false;
+            }
+        }
+
+        let errorCompanyBoss = true;
+        $('#companyBoss').keyup(checkCompanyBoss);
+
+        function checkCompanyBoss() {
+            let occupation = $('#occupation').val();
+            let companyBoss = $('#companyBoss').val();
+            if (occupation === 'EMPLEADO' && companyBoss.length === 0) {
+                $('#companyBossCheck').html('**Campo requerido**');
+                $('#companyBossCheck').show();
+                errorCompanyBoss = true;
+            } else {
+                $('#companyBossCheck').hide();
+                errorCompanyBoss = false;
+            }
+        }
+
+        let errorCompanyPhone = true;
+        $('#companyPhone').keyup(checkCompanyPhone);
+
+        function checkCompanyPhone() {
+            let occupation = $('#occupation').val();
+            let companyPhone = $('#companyPhone').val();
+            if (occupation === 'EMPLEADO') {
+                if (companyPhone.length === 0) {
+                    $('#companyPhoneCheck').html('**Campo requerido**');
+                    $('#companyPhoneCheck').show();
+                    errorCompanyPhone = true;
+                } else if (companyPhone.length < 10) {
+                    $('#companyPhoneCheck').html('**Número de teléfono inválido**');
+                    $('#companyPhoneCheck').show();
+                    errorCompanyPhone = true;
+                } else if (Number.isNaN(Number(companyPhone))) {
+                    $('#companyPhoneCheck').html('**Debe ser un número válido**');
+                    $('#companyPhoneCheck').show();
+                    errorCompanyPhone = true;
+                } else {
+                    $('#companyPhoneCheck').hide();
+                    errorCompanyPhone = false;
+                }
+            } else {
+                $('#companyPhoneCheck').hide();
+                errorCompanyPhone = false;
+            }
+        }
+
+        let errorCompanyAddress = true;
+        $('#companyAddress').keyup(checkCompanyAddress);
+
+        function checkCompanyAddress() {
+            let occupation = $('#occupation').val();
+            let companyAddress = $('#companyAddress').val();
+            if (occupation === 'EMPLEADO' && companyAddress.length === 0) {
+                $('#companyAddressCheck').html('**Campo requerido**');
+                $('#companyAddressCheck').show();
+                errorCompanyAddress = true;
+            } else {
+                $('#companyAddressCheck').hide();
+                errorCompanyAddress = false;
+            }
+        }
+
+        let errorCompanyYears = true;
+        $('#companyYears').keyup(checkCompanyYears);
+
+        function checkCompanyYears() {
+            let occupation = $('#occupation').val();
+            let companyYears = $('#companyYears').val();
+            if (occupation === 'EMPLEADO' && companyYears.length === 0) {
+                $('#companyYearsCheck').html('**Campo requerido**');
+                $('#companyYearsCheck').show();
+                errorCompanyYears = true;
+            } else {
+                $('#companyYearsCheck').hide();
+                errorCompanyYears = false;
+            }
+        }
+
+        let errorCardNumber = true;
+        $('#cardNumber').keyup(checkCardNumber);
+
+        function checkCardNumber() {
+            let cardNumber = $('#cardNumber').val();
+            if (cardNumber.length === 0) {
+                $('#cardNumberCheck').html('**Campo requerido**').show();
+                errorCardNumber = true;
+            } else if (cardNumber.length !== 18 || Number.isNaN(Number(cardNumber))) {
+                $('#cardNumberCheck').html('**Número inválido**').show();
+                errorCardNumber = true;
+            } else {
+                $('#cardNumberCheck').hide();
+                errorCardNumber = false;
+            }
+        }
+
+        let errorCardType = true;
+        $('#cardType').change(checkCardType);
+
+        function checkCardType() {
+            let cardType = $('#cardType').val();
+            if (cardType === 'null') {
+                $('#cardTypeCheck').html('**Campo requerido**').show();
+                errorCardType = true;
+            } else {
+                $('#cardTypeCheck').hide();
+                errorCardType = false;
+            }
+        }
+
+        let errorCardExpiration = true;
+        $('#cardExpiration').change(checkCardExpiration);
+
+        function checkCardExpiration() {
+            let cardExpiration = $('#cardExpiration').val();
+            if (cardExpiration.length === 0) {
+                $('#cardExpirationCheck').html('**Campo requerido**').show();
+                errorCardExpiration = true;
+            //} else if (cardExpiration) {
+            } else {
+                $('#cardExpirationCheck').hide();
+                errorCardExpiration = false;
+            }
+        }
+
+        let errorCardCvv = true;
+        $('#cardCvv').keyup(checkCardCvv);
+
+        function checkCardCvv() {
+            let cardCvv = $('#cardCvv').val();
+            if (cardCvv.length === 0) {
+                $('#cardCvvCheck').html('**Campo requerido**').show();
+                errorCardCvv = true;
+            } else if (cardCvv.length !== 3) {
+                $('#cardCvvCheck').html('**CVV inválido**').show();
+                errorCardCvv = true;
+            } else {
+                $('#cardCvvCheck').hide();
+                errorCardCvv = false;
+            }
+        }
 
         //=====[ Botón - Siguiente ]=====
-        $('#calculate').click(function () {
+        $('#nextButton').click(function () {
             checkName();
             checkLastName();
             checkSecondLastName();
             checkCompanyIncome();
             checkLoanAmount();
             checkTerm();
+            checkAddress();
+            checkPhone();
+            checkElectorKey();
+            checkBirthDate();
+            checkCivilStatus();
+            checkOccupation();
+            checkSpouseName();
+            checkSpouseLastName();
+            checkSpouseSecondLastName();
+            checkSpousePhone();
+            checkSpouseAddress();
+            checkSpouseOccupation();
+            checkCompanyName();
+            checkCompanyPosition();
+            checkCompanyBoss();
+            checkCompanyPhone();
+            checkCompanyAddress();
+            checkCompanyYears();
+            checkCardNumber();
+            checkCardType();
+            checkCardExpiration();
+            checkCardCvv();
 
-            if (!errorName && !errorLastName && !errorSecondLastName && !errorCompanyIncome && !errorLoanAmount && !errorTerm) {
-                $.ajax({
-                    url: 'simulator/calcular',
-                    type: 'POST',
-                    data: $('#accountOpen').serialize(),
-                    success: function (response) {
-                        console.log(response);
-                        $('#results').html(response);
-                    }
-                });
+            const errosBase = !errorName && !errorLastName && !errorSecondLastName && !errorCompanyIncome && !errorLoanAmount && !errorTerm;
+            const errosPersonales = !errorAddress && !errorPhone && !errorElectorKey && !errorBirthDate && !errorCivilStatus && !errorOccupation;
+            const errosConyuge = !errorSpouseName && !errorSpouseLastName && !errorSpouseSecondLastName && !errorSpousePhone && !errorSpouseAddress && !errorSpouseOccupation;
+            const errosLaborales = !errorCompanyName && !errorCompanyPosition && !errorCompanyBoss && !errorCompanyPhone && !errorCompanyAddress && !errorCompanyYears;
+            const errosTarjeta = !errorCardNumber && !errorCardType && !errorCardExpiration && !errorCardCvv;
+            console.log(errosBase);
+            console.log(errosPersonales);
+            console.log(errosConyuge);
+            console.log(errosLaborales);
+            console.log(errosTarjeta);
+
+            if (errosBase && errosPersonales && errosConyuge && errosLaborales && errosTarjeta) {
+                $('#accountOpen').submit();
             }
         });
     });
@@ -649,6 +1077,8 @@
             $('#spouseOccupation').val('null');
         }
     }
+
+    function onContinue() {}
 </script>
 </body>
 </html>
