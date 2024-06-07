@@ -28,7 +28,7 @@
 <body>
 
 <nav class="navbar navbar-expand-lg navbar-dark navbar-static-top" role="navigation">
-    <a class="navbar-brand" href="/#"><asset:image src="logo.png" alt="Mónaco S.A. de C.V." class="img-fluid" style="height: 60px;"/></a>
+    <a class="navbar-brand" href="${createLink(uri: "/#")}"><asset:image src="logo.png" alt="Mónaco S.A. de C.V." class="img-fluid" style="height: 60px;"/></a>
     <div class="title">SISTEMA DE MÓNACO S.A DE C.V</div>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>

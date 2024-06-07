@@ -62,13 +62,13 @@
         <div class="panel-body">
           <ul class="list-group">
             <li class="list-group-item">
-              <a href="/catPlazo"><i class="fa fa-calendar"></i> Administrar Plazos</a>
+              <a href="${createLink(uri: "/catPlazo")}"><i class="fa fa-calendar"></i> Administrar Plazos</a>
             </li>
             <li class="list-group-item">
-              <a href="/catLimiteCredito"><i class="fa fa-credit-card"></i> Administrar Límites de Crédito</a>
+              <a href="${createLink(uri: "/catLimiteCredito")}"><i class="fa fa-credit-card"></i> Administrar Límites de Crédito</a>
             </li>
             <li class="list-group-item">
-              <a href="/user"><i class="fa fa-user"></i> Administrar Usuarios</a>
+              <a href="${createLink(uri: "/user")}"><i class="fa fa-user"></i> Administrar Usuarios</a>
             </li>
           </ul>
         </div>

@@ -72,15 +72,15 @@
 <body>
 <div class="container">
     <div class="dashboard">
-        <a class="card" href="/simulator">
+        <a class="card" href="${createLink(uri: "/simulator")}">
             <i class="fa fa-users" style="color: #FF8811;"></i>
             <h3 style="color: #FF8811;">SIMULADOR</h3>
         </a>
-        <a class="card" style="background-color: #392F5A" href="/cliente">
+        <a class="card" style="background-color: #392F5A" href="${createLink(uri: "/cliente")}">
             <i class="fa fa-cogs" style="color: #FFF;"></i>
             <h3 style="color: #FFF">CLIENTES</h3>
         </a>
-        <a class="card" style="background-color: #FF8811"  href="/account/opening">
+        <a class="card" style="background-color: #FF8811"  href="${createLink(uri: "/account/opening")}">
             <i class="fa fa-user-plus" style="color: #FFF;"></i>
             <h3 style="color: #FFF;">APERTURA DE CUENTA</h3>
         </a>

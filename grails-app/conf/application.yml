@@ -105,19 +105,21 @@ dataSource:
     driverClassName: com.mysql.jdbc.Driver
     dialect: org.hibernate.dialect.MySQL5InnoDBDialect
     url: jdbc:mysql://localhost:3306/tescha_ing_software_prestamos
-    username: root
-    password: ""
+    password:
 
 environments:
     development:
         dataSource:
             dbCreate: update
+            username: root
     test:
         dataSource:
             dbCreate: update
     production:
+        grails.serverURL: "http://158.101.102.118:8070/prestamos"
         dataSource:
             dbCreate: update
+            username: root
             properties:
                 jmxEnabled: true
                 initialSize: 5
