@@ -394,6 +394,11 @@
 </div>
 
 <script>
+    let formatter = new Intl.NumberFormat('es-MX', {
+        style: 'currency',
+        currency: 'MXN',
+    });
+
     $(document).ready(function () {
         let today = new Date();
         let eighteenYearsAgo = new Date();
@@ -423,6 +428,14 @@
                 $('#nameCheck').html('**Campo requerido**');
                 $('#nameCheck').show();
                 errorName = true;
+            } else if (nameValue.length < 2) {
+                $('#nameCheck').html('**Debe tener al menos 2 caracteres**');
+                $('#nameCheck').show();
+                errorName = true;
+            } else if (/\d+/.test(nameValue)) {
+                $('#nameCheck').html('**No puede contener números**');
+                $('#nameCheck').show();
+                errorName = true;
             } else {
                 $('#nameCheck').hide();
                 errorName = false;
@@ -438,6 +451,14 @@
                 $('#lastNameCheck').html('**Campo requerido**');
                 $('#lastNameCheck').show();
                 errorLastName = true;
+            } else if (lastNameValue.length < 2) {
+                $('#lastNameCheck').html('**Debe tener al menos 2 caracteres**');
+                $('#lastNameCheck').show();
+                errorName = true;
+            } else if (/\d+/.test(lastNameValue)) {
+                $('#lastNameCheck').html('**No puede contener números**');
+                $('#lastNameCheck').show();
+                errorName = true;
             } else {
                 $('#lastNameCheck').hide();
                 errorLastName = false;
@@ -451,6 +472,14 @@
             let secondLastNameValue = $('#secondLastName').val();
             if (secondLastNameValue.length === 0) {
                 $('#secondLastNameCheck').html('**Campo requerido**');
+                $('#secondLastNameCheck').show();
+                errorSecondLastName = true;
+            } else if (secondLastNameValue.length < 2) {
+                $('#secondLastNameCheck').html('**Debe tener al menos 2 caracteres**');
+                $('#secondLastNameCheck').show();
+                errorSecondLastName = true;
+            } else if (/\d+/.test(secondLastNameValue)) {
+                $('#secondLastNameCheck').html('**No contener números**');
                 $('#secondLastNameCheck').show();
                 errorSecondLastName = true;
             } else {
@@ -495,9 +524,11 @@
             let companyIncomeValue = $('#companyIncome').val();
             let loanAmountValue = $('#loanAmount').val();
             let catLimites = JSON.parse('${raw(catLimiteListJson)}');
+            // Buscar el límite que entre entre el monto mínimo y máximo
+            let limit = catLimites.find(limite => limite.montoMinimo <= companyIncomeValue && limite.montoMaximo >= companyIncomeValue);
 
             if (loanAmountValue.length === 0 || Number(loanAmountValue) <= 0) {
-                $('#loanAmountCheck').html('**Campo requerido**');
+                $('#loanAmountCheck').html('**Campo requerido**' + (limit ? ' (Máximo: ' + formatter.format(limit.montoPrestamo) + ')' : '') );
                 $('#loanAmountCheck').show();
                 errorLoanAmount = true;
             } else if (Number.isNaN(Number(loanAmountValue))) {
@@ -508,27 +539,22 @@
                 $('#loanAmountCheck').html('**Debe ser mayor a $1,000.00**');
                 $('#loanAmountCheck').show();
                 errorLoanAmount = true;
+            } else if (!limit && loanAmountValue > 0) {
+                $('#loanAmountCheck').html('**Préstamo no permitido para el ingreso**');
+                $('#loanAmountCheck').show();
+                errorLoanAmount = true;
+            } else if (loanAmountValue > limit.montoPrestamo) {
+                let formatter = new Intl.NumberFormat('es-MX', {
+                    style: 'currency',
+                    currency: 'MXN',
+                });
+
+                $('#loanAmountCheck').html('**Préstamo máximo de ' + formatter.format(limit.montoPrestamo) + '**');
+                $('#loanAmountCheck').show();
+                errorLoanAmount = true;
             } else {
-                // Buscar el límite que entre entre el monto mínimo y máximo
-                let limit = catLimites.find(limite => limite.montoMinimo <= companyIncomeValue && limite.montoMaximo >= companyIncomeValue);
-
-                if (!limit && loanAmountValue > 0) {
-                    $('#loanAmountCheck').html('**Préstamo no permitido para el ingreso**');
-                    $('#loanAmountCheck').show();
-                    errorLoanAmount = true;
-                } else if (loanAmountValue > limit.montoPrestamo) {
-                    let formatter = new Intl.NumberFormat('es-MX', {
-                        style: 'currency',
-                        currency: 'MXN',
-                    });
-
-                    $('#loanAmountCheck').html('**Préstamo máximo de ' + formatter.format(limit.montoPrestamo) + '**');
-                    $('#loanAmountCheck').show();
-                    errorLoanAmount = true;
-                } else {
-                    $('#loanAmountCheck').hide();
-                    errorLoanAmount = false;
-                }
+                $('#loanAmountCheck').hide();
+                errorLoanAmount = false;
             }
         }
 
@@ -698,6 +724,10 @@
                     $('#spouseNameCheck').hide();
                     errorSpouseName = false;
                 }
+            } else if (/\d+/.test(spouseName)) {
+                $('#spouseNameCheck').html('**No puede contener números**');
+                $('#spouseNameCheck').show();
+                errorSpouseName = true;
             } else {
                 $('#spouseNameCheck').hide();
                 errorSpouseName = false;
@@ -714,6 +744,10 @@
                 let spouseLastName = $('#spouseLastName').val();
                 if (spouseLastName.length === 0) {
                     $('#spouseLastNameCheck').html('**Campo requerido**');
+                    $('#spouseLastNameCheck').show();
+                    errorSpouseLastName = true;
+                } else if (/\d+/.test(spouseLastName)) {
+                    $('#spouseLastNameCheck').html('**No puede contener números**');
                     $('#spouseLastNameCheck').show();
                     errorSpouseLastName = true;
                 } else {
@@ -735,6 +769,10 @@
                 let spouseSecondLastName = $('#spouseSecondLastName').val();
                 if (spouseSecondLastName.length === 0) {
                     $('#spouseSecondLastNameCheck').html('**Campo requerido**');
+                    $('#spouseSecondLastNameCheck').show();
+                    errorSpouseSecondLastName = true;
+                } else if (/\d+/.test(spouseSecondLastName)) {
+                    $('#spouseSecondLastNameCheck').html('**No puede contener números**');
                     $('#spouseSecondLastNameCheck').show();
                     errorSpouseSecondLastName = true;
                 } else {
@@ -863,6 +901,10 @@
                 $('#companyBossCheck').html('**Campo requerido**');
                 $('#companyBossCheck').show();
                 errorCompanyBoss = true;
+            } else if (/\d+/.test(companyBoss)) {
+                $('#companyBossCheck').html('**No puede contener números**');
+                $('#companyBossCheck').show();
+                errorCompanyBoss = true;
             } else {
                 $('#companyBossCheck').hide();
                 errorCompanyBoss = false;
@@ -961,6 +1003,20 @@
             }
         }
 
+        let errorCardName = true;
+        $('#cardName').keyup(checkCardName);
+
+        function checkCardName() {
+            let cardName = $('#cardName').val();
+            if (cardName.length === 0) {
+                $('#cardNameCheck').html('**Campo requerido**').show();
+                errorCardName = true;
+            } else {
+                $('#cardNameCheck').hide();
+                errorCardName = false;
+            }
+        }
+
         let errorCardExpiration = true;
         $('#cardExpiration').change(checkCardExpiration);
 
@@ -969,7 +1025,12 @@
             if (cardExpiration.length === 0) {
                 $('#cardExpirationCheck').html('**Campo requerido**').show();
                 errorCardExpiration = true;
-            //} else if (cardExpiration) {
+            } else if (cardExpiration.length !== 10) {
+                $('#cardExpirationCheck').html('**Fecha inválida**').show();
+                errorCardExpiration = true;
+            } else if (new Date(cardExpiration) < new Date()) {
+                $('#cardExpirationCheck').html('**Tarjeta expirada**').show();
+                errorCardExpiration = true;
             } else {
                 $('#cardExpirationCheck').hide();
                 errorCardExpiration = false;
@@ -986,6 +1047,9 @@
                 errorCardCvv = true;
             } else if (cardCvv.length !== 3) {
                 $('#cardCvvCheck').html('**CVV inválido**').show();
+                errorCardCvv = true;
+            } else if (Number.isNaN(Number(cardCvv))) {
+                $('#cardCvvCheck').html('**Debe ser un número**').show();
                 errorCardCvv = true;
             } else {
                 $('#cardCvvCheck').hide();
@@ -1021,6 +1085,7 @@
             checkCompanyYears();
             checkCardNumber();
             checkCardType();
+            checkCardName();
             checkCardExpiration();
             checkCardCvv();
 
@@ -1028,12 +1093,7 @@
             const errosPersonales = !errorAddress && !errorPhone && !errorElectorKey && !errorBirthDate && !errorCivilStatus && !errorOccupation;
             const errosConyuge = !errorSpouseName && !errorSpouseLastName && !errorSpouseSecondLastName && !errorSpousePhone && !errorSpouseAddress && !errorSpouseOccupation;
             const errosLaborales = !errorCompanyName && !errorCompanyPosition && !errorCompanyBoss && !errorCompanyPhone && !errorCompanyAddress && !errorCompanyYears;
-            const errosTarjeta = !errorCardNumber && !errorCardType && !errorCardExpiration && !errorCardCvv;
-            console.log(errosBase);
-            console.log(errosPersonales);
-            console.log(errosConyuge);
-            console.log(errosLaborales);
-            console.log(errosTarjeta);
+            const errosTarjeta = !errorCardNumber && !errorCardType && !errorCardName && !errorCardExpiration && !errorCardCvv;
 
             if (errosBase && errosPersonales && errosConyuge && errosLaborales && errosTarjeta) {
                 $('#accountOpen').submit();
@@ -1066,6 +1126,7 @@
             $('#companyYears').val('');
             $('#cardNumber').val('');
             $('#cardType').val('null');
+            $('#cardName').val('');
             $('#cardExpiration').val('');
             $('#cardCvv').val('');
             $('#spouseName').val('');

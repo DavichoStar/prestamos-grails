@@ -1,5 +1,8 @@
 package com.monaco.prestamos.catalogos
 
+import com.monaco.prestamos.Prestamo
+
+
 class CatPlazo {
 
     int meses
@@ -8,6 +11,8 @@ class CatPlazo {
     boolean activo = true
     Date dateCreated
     Date lastUpdated
+
+    static hasMany = [prestamos: Prestamo]
 
     static constraints = {
         meses nullable: false, blank: false
@@ -27,8 +32,8 @@ class CatPlazo {
         lastUpdated = new Date()
     }
 
+    @Override
     String toString() {
-        meses
+        return "${meses} meses al ${intereses}%"
     }
-
 }

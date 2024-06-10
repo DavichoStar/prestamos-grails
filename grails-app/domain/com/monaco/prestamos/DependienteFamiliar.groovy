@@ -20,7 +20,13 @@ class DependienteFamiliar {
 		nombre maxSize: 50
 		apellidoPaterno maxSize: 50
 		apellidoMaterno maxSize: 50
+		parentesco: nullable: false
 		fechaNacimiento nullable: true
 		ocupacion nullable: true
+	}
+
+	@Override
+	String toString() {
+		return "${nombre} ${apellidoPaterno} ${apellidoMaterno}"
 	}
 }

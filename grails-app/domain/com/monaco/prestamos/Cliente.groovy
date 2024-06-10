@@ -8,18 +8,18 @@ class Cliente {
 	String direccion
 	String telefono
 	String claveElector
-	String ocupacion
 	String estadoCivil
+	String ocupacion
 	Date fechaNacimiento
 	Date createdAt
 	Date uptatedAt
 	Conyuge conyuge
+	DatosLaborales datosLaborales
+	MetodoPago metodoPago
+	User userCreated
 
-	static hasMany = [datosLaboraleses: DatosLaborales,
-	                  dependienteFamiliars: DependienteFamiliar,
-	                  metodoPagos: MetodoPago,
-	                  prestamos: Prestamo]
-	static belongsTo = [Conyuge]
+	static hasMany = [dependienteFamiliars: DependienteFamiliar, prestamos: Prestamo]
+	static belongsTo = [Conyuge, DatosLaborales, MetodoPago, User]
 
 	static mapping = {
 		id column: "id_cliente"
@@ -35,6 +35,10 @@ class Cliente {
 		estadoCivil maxSize: 100
 		createdAt nullable: true
 		uptatedAt nullable: true
+		userCreated nullable: true
+		conyuge nullable: true
+		datosLaborales nullable: true
+		metodoPago nullable: true
 	}
 
 	def beforeInsert() {
@@ -43,5 +47,10 @@ class Cliente {
 
 	def beforeUpdate() {
 		uptatedAt = new Date()
+	}
+
+	@Override
+	String toString() {
+		return "${nombre} ${apellidoPaterno} ${apellidoMaterno}"
 	}
 }

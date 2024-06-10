@@ -70,9 +70,9 @@ class SimulatorController {
                         <button class="print col" type="button" onclick="onPrint()">IMPRIMIR</button>
                     </div>
     
-                    <div class="col-12 col-sm-6">
+                    <!-- <div class="col-12 col-sm-6">
                         <button class="save col" type="button" onclick="onSave()">GUARDAR</button>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </div>

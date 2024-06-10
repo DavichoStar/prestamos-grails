@@ -60,7 +60,7 @@
 
 <footer class="footer row" role="contentinfo">
     <div class="col">
-        <p>Desarrollado por <a href="https://github.com/DavichoStar" target="_blank">DavichoStar</a>.</p>
+        <p>Desarrollado por <a href="https://github.com/DavichoStar" target="_blank">Erick Flores</a> e Isaías Zarano</p>
     </div>
 </footer>
 

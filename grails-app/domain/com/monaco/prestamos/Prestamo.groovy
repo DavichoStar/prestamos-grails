@@ -1,17 +1,19 @@
 package com.monaco.prestamos
 
+import com.monaco.prestamos.catalogos.CatPlazo
+
 class Prestamo {
 
 	Double cantidadPrestamo
-	Integer plazoMeses
-	Float intereses
+	CatPlazo plazo
 	Integer diaDePago
 	String estatus
 	Date createdAt
 	Date updatedAt
+	Cliente cliente
+	User userCreated
 
-	static hasMany = [pagos: Pago]
-	static belongsTo = [Cliente]
+	static belongsTo = [CatPlazo, Cliente, User]
 
 	static mapping = {
 		id column: "id_prestamo"
@@ -22,6 +24,9 @@ class Prestamo {
 		diaDePago nullable: true
 		estatus nullable: true, maxSize: 100
 		createdAt nullable: true
+		updatedAt nullable: true
+		cliente nullable: false
+		userCreated nullable: true
 	}
 
 	def beforeInsert() {
@@ -30,5 +35,9 @@ class Prestamo {
 
 	def beforeUpdate() {
 		updatedAt = new Date()
+	}
+
+	String toString() {
+		return "\$${cantidadPrestamo} a ${plazo.meses} meses"
 	}
 }

@@ -17,6 +17,7 @@ class Pago {
 
 	static constraints = {
 		createdAt nullable: true
+		updatedAt nullable: true
 	}
 
 	def beforeInsert() {
@@ -25,5 +26,10 @@ class Pago {
 
 	def beforeUpdate() {
 		updatedAt = new Date()
+	}
+
+	@Override
+	String toString() {
+		return "Pago: ${id} por \$${cantidad}"
 	}
 }

@@ -1,19 +1,23 @@
 package com.monaco.prestamos
 
 import grails.converters.JSON
+import grails.gorm.transactions.Transactional
 import grails.plugin.springsecurity.annotation.Secured
+import grails.validation.ValidationException
 import com.monaco.prestamos.catalogos.CatLimiteCredito
 import com.monaco.prestamos.catalogos.CatPlazo
-import com.monaco.prestamos.Cliente
-import com.monaco.prestamos.Conyuge
-import com.monaco.prestamos.DatosLaborales
-import com.monaco.prestamos.MetodoPago
-import com.monaco.prestamos.Prestamo
 
 import java.text.NumberFormat
 
 @Secured(['ROLE_ADMIN', 'ROLE_MANAGER'])
 class AccountController {
+
+    def springSecurityService
+    ConyugeService conyugeService
+    MetodoPagoService metodoPagoService
+    DatosLaboralesService datosLaboralesService
+    ClienteService clienteService
+    PrestamoService prestamoService
 
     def index() { }
 
@@ -63,9 +67,13 @@ class AccountController {
          dayCut: dayCut, dayLimit: dayLimit]
     }
 
+    @Transactional
     def openingSave() {
         try {
-            def conyuge = null;
+            Conyuge conyuge = null;
+            MetodoPago metodoPago = null;
+            DatosLaborales datosLaborales = null;
+            User user = springSecurityService.currentUser
 
             if (params.spouseName) {
                 conyuge = new Conyuge(
@@ -77,29 +85,56 @@ class AccountController {
                         genero: params.spouseGender,
                         ocupacion: params.spouseOccupation
                 )
-                conyuge.save()
+                try {
+                    conyuge = conyugeService.save(conyuge)
+                } catch (ValidationException e) {
+                    System.out.println(e)
+                    flash.error = "Error al crear la cuenta. Algún dato del cónyuge es incorrecto"
+                    redirect action: "resume", params: params
+                    return
+                }
             }
 
-            def datosLaborales = new DatosLaborales(
-                    nombre: params.companyName,
-                    puesto: params.companyPosition,
-                    nombreJefeInmediato: params.companyBoss,
-                    telefono: params.companyPhone,
-                    direccion: params.companyAddress,
-                    antiguedad: params.companyYears,
-                    sueldo: params.companyIncome
-            )
-            datosLaborales.save()
+            if (params.companyIncome) {
+                datosLaborales = new DatosLaborales(
+                        nombre: params.companyName,
+                        puesto: params.companyPosition,
+                        nombreJefeInmediato: params.companyBoss,
+                        telefono: params.companyPhone,
+                        direccion: params.companyAddress,
+                        antiguedad: params.companyYears,
+                        sueldo: params.companyIncome
+                )
+                try {
+                    datosLaborales = datosLaboralesService.save(datosLaborales)
+                } catch (ValidationException e) {
+                    System.out.println(e)
+                    if (conyuge && conyuge.id) conyugeService.delete(conyuge.id)
+                    flash.error = "Error al crear la cuenta. Algún dato laboral es incorrecto"
+                    redirect action: "resume", params: params
+                    return
+                }
+            }
 
-            def metodoPago = new MetodoPago(
-                    numeroTarjeta: params.cardNumber,
-                    tipoTarjeta: params.cardType,
-                    nombreTarjeta: params.cardName,
-                    banco: '',
-                    fechaCaducidad: params.cardExpiration,
-                    cvv: params.cardCvv
-            )
-            metodoPago.save()
+            if (params.cardNumber) {
+                metodoPago = new MetodoPago(
+                        numeroTarjeta: params.cardNumber,
+                        tipoTarjeta: params.cardType,
+                        nombreTarjeta: params.cardName,
+                        fechaCaducidad: params.cardExpiration,
+                        cvv: params.cardCvv
+                )
+                try {
+                    metodoPago = metodoPagoService.save(metodoPago)
+                } catch (ValidationException e) {
+                    System.out.println(e)
+                    if (conyuge && conyuge.id) conyugeService.delete(conyuge.id)
+                    if (datosLaborales && datosLaborales.id) datosLaboralesService.delete(datosLaborales.id)
+                    flash.error = "Error al crear la cuenta. Algún dato de la tarjeta es incorrecto"
+                    redirect action: "resume", params: params
+                    return
+                }
+            }
 
             def term = CatPlazo.get(params.term as Long) // Plazo
             // Calcular el día de corte, buscar el día, 4, 7, 18 o 28 más cercano al día actual
@@ -113,16 +148,8 @@ class AccountController {
             } else if (dayCut < 28) {
                 dayCut = 28
             }
-            def prestamo = new Prestamo(
-                    cantidadPrestamo: params.loanAmount,
-                    plazoMeses: term.meses,
-                    intereses: term.intereses,
-                    diaDePago: dayCut,
-                    estatus: "PENDIENTE",
-            )
-            prestamo.save()
 
-            def account = new Cliente(
+            Cliente cliente = new Cliente(
                     nombre: params.name,
                     apellidoPaterno: params.lastName,
                     apellidoMaterno: params.secondLastName,
@@ -132,17 +159,49 @@ class AccountController {
                     estadoCivil: params.civilStatus,
                     ocupacion: params.occupation,
                     fechaNacimiento: params.birthDate,
-                    conyuge: conyuge,
-                    datosLaborales: datosLaborales,
-                    metodoPago: metodoPago,
-                    prestamo: prestamo,
+                    userCreated: user,
             )
-            account.save()
+            if (conyuge) cliente.conyuge = conyuge
+            if (datosLaborales) cliente.datosLaborales = datosLaborales
+            if (metodoPago) cliente.metodoPago = metodoPago
+
+            try {
+                cliente = clienteService.save(cliente)
+            } catch (ValidationException e) {
+                System.out.println(e)
+                if (conyuge && conyuge.id) conyugeService.delete(conyuge.id)
+                if (datosLaborales && datosLaborales.id) datosLaboralesService.delete(datosLaborales.id)
+                if (metodoPago && metodoPago.id) metodoPagoService.delete(metodoPago.id)
+                flash.error = "Error al crear la cuenta. Algún dato del cliente es incorrecto"
+                redirect action: "resume", params: params
+                return
+            }
+
+            Prestamo prestamo = new Prestamo(
+                    cantidadPrestamo: params.loanAmount,
+                    plazo: term,
+                    diaDePago: dayCut,
+                    estatus: "PENDIENTE",
+                    cliente: cliente,
+                    userCreated: cliente.userCreated,
+            )
+            try {
+                prestamo = prestamoService.save(prestamo)
+            } catch (ValidationException e) {
+                System.out.println(e)
+                if (conyuge && conyuge.id) conyugeService.delete(conyuge.id)
+                if (datosLaborales && datosLaborales.id) datosLaboralesService.delete(datosLaborales.id)
+                if (metodoPago && metodoPago.id) metodoPagoService.delete(metodoPago.id)
+                flash.error = "Error al crear la cuenta. Algún dato del préstamo es incorrecto"
+                redirect action: "resume", params: params
+                return
+            }
 
             flash.message = "Cuenta creada exitosamente"
             redirect controller: 'main', action: "index"
         } catch (Exception e) {
-            flash.error = "Error al crear la cuenta"
+            System.out.println(e)
+            flash.error = "Error al crear la cuenta. Intente de nuevo"
             redirect action: "resume", params: params
         }
     }

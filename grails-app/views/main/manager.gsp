@@ -72,6 +72,15 @@
 <body>
 <div class="container">
     <div class="dashboard">
+        <g:if test="${flash.message}">
+            <div class="message great-alert" role="status">${flash.message}</div>
+        </g:if>
+        <g:if test="${flash.error}">
+            <ul class="errors" role="alert">
+                <li>${flash.error}</li>
+            </ul>
+        </g:if>
+
         <a class="card" href="${createLink(uri: "/simulator")}">
             <i class="fa fa-users" style="color: #FF8811;"></i>
             <h3 style="color: #FF8811;">SIMULADOR</h3>

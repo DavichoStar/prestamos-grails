@@ -21,4 +21,9 @@ class Conyuge {
 		apellidoMaterno maxSize: 50
 		telefono maxSize: 14
 	}
+
+	@Override
+	String toString() {
+		return "${nombre} ${apellidoPaterno} ${apellidoMaterno}"
+	}
 }

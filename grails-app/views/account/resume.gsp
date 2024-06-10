@@ -83,6 +83,15 @@
 <div class="container">
     <h1>RESUMEN DEL PRÉSTAMO</h1>
 
+    <g:if test="${flash.message}">
+        <div class="message great-alert" role="status">${flash.message}</div>
+    </g:if>
+    <g:if test="${flash.error}">
+        <ul class="errors" role="alert">
+            <li>${flash.error}</li>
+        </ul>
+    </g:if>
+
     <form class="row" id="openForm" method="post" action="${createLink(controller: 'account', action: 'openingSave', params: params)}">
         <div class="col-12 col-sm-6">
             <div class="card">
@@ -265,10 +274,6 @@
                     <div class="row justify-content-center align-items-center mt-4">
                         <div class="col-12 col-sm-6">
                             <button class="print col" type="button" onclick="onPrint()">IMPRIMIR</button>
-                        </div>
-
-                        <div class="col-12 col-sm-6">
-                            <button class="save col" type="button" onclick="onSave()">GUARDAR</button>
                         </div>
                     </div>
 

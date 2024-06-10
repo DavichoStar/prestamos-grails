@@ -6,10 +6,8 @@ class MetodoPago {
 	Date fechaCaducidad
 	Integer cvv
 	String tipoTarjeta
-	String banco
 
-	static hasMany = [pagos: Pago]
-	static belongsTo = [Cliente]
+	static hasMany = [pagos: Pago, clientes: Cliente]
 
 	static mapping = {
 		id column: "id_metodo_pago"
@@ -19,5 +17,10 @@ class MetodoPago {
 	static constraints = {
 		numeroTarjeta maxSize: 16
 		tipoTarjeta nullable: true, maxSize: 7
+	}
+
+	@Override
+	String toString() {
+		return "Tarjeta de " + tipoTarjeta
 	}
 }

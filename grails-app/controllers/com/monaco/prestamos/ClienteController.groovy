@@ -20,10 +20,12 @@ class ClienteController {
         respond clienteService.get(id)
     }
 
+    @Secured(['ROLE_ADMIN'])
     def create() {
         respond new Cliente(params)
     }
 
+    @Secured(['ROLE_ADMIN'])
     def save(Cliente cliente) {
         if (cliente == null) {
             notFound()

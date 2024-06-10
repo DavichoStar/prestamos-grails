@@ -70,6 +70,12 @@
             <li class="list-group-item">
               <a href="${createLink(uri: "/user")}"><i class="fa fa-user"></i> Administrar Usuarios</a>
             </li>
+            <li class="list-group-item">
+              <a href="${createLink(uri: "/prestamo")}"><i class="fa fa-money"></i> Administrar Préstamos</a>
+            </li>
+            <li class="list-group-item">
+              <a href="${createLink(uri: "/cliente")}"><i class="fa fa-users"></i> Administrar Clientes</a>
+            </li>
           </ul>
         </div>
       </div>
